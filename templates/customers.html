@@ -1,6 +1,6 @@
 {% extends "base.html" %}{% block title %}Customers{% endblock %}{% block content %}
 <div class="page-heading"><div><p class="eyebrow">CUSTOMER MANAGEMENT</p><h1>Customers</h1><p class="muted">Create customer logins and set their milk rate.</p></div></div>
-<section class="panel form-panel"><h2>Add a customer</h2><form method="post" action="{{ url_for('add_customer') }}" class="form-grid">
+<section class="panel form-panel"><h2>Add new customer</h2><form method="post" action="{{ url_for('add_customer') }}" class="form-grid">
 <div><label>Full name</label><input name="name" required placeholder="Customer name"></div><div><label>Username</label><input name="username" required minlength="3" placeholder="Unique username"></div>
 <div><label>Temporary password</label><input name="password" type="password" minlength="8" required placeholder="At least 8 characters"></div><div><label>Phone</label><input name="phone" type="tel" placeholder="Phone number"></div>
 <div><label>Address</label><input name="address" placeholder="Delivery address"></div><div><label>Price per litre (₹)</label><input name="price_per_litre" type="number" min="0" step="0.01" value="60" required></div>
