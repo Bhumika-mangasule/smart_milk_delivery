@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Login{% endblock %}{% block content %}
+<section class="login-layout"><div class="login-promo"><div class="big-milk">🥛</div><p class="eyebrow">SMART MILK MANAGEMENT</p>
+<h1>Every delivery.<br>Every bill. In one place.</h1><p>Track daily milk deliveries, keep customer records, and calculate weekly or monthly bills without the paperwork.</p>
+<div class="promo-points"><span>✓ Daily records</span><span>✓ Clear billing</span><span>✓ Demand prediction</span></div></div>
+<form class="login-card panel" method="post"><p class="eyebrow">WELCOME BACK</p><h2>Sign in to MilkTrack</h2><p class="muted">Use your admin or customer account.</p>
+<label for="username">Username</label><input id="username" name="username" required autocomplete="username" placeholder="Enter username">
+<label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password" placeholder="Enter password">
+<button class="btn primary full" type="submit">Login securely</button><div class="demo-box"><strong>Demo accounts</strong><p>Admin: <code>admin</code> / <code>Admin@123</code></p><p>Customer: <code>asha</code> / <code>Customer@123</code></p></div></form></section>{% endblock %}

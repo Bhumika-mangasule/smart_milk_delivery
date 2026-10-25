@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Admin Dashboard{% endblock %}{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ADMIN WORKSPACE</p><h1>Good day, {{ session.get('name') }} 👋</h1><p class="muted">Business overview for {{ today }}.</p></div><a class="btn primary" href="{{ url_for('deliveries') }}">＋ Add delivery</a></div>
+<section class="stats-grid">
+<article class="stat-card"><div class="stat-icon violet">👥</div><p>Customers delivered today</p><h2>{{ stats['customers'] }}</h2><small>Unique customers</small></article>
+<article class="stat-card"><div class="stat-icon blue">🥛</div><p>Milk delivered today</p><h2>{{ "%.2f"|format(stats['litres']) }} L</h2><small>Total recorded quantity</small></article>
+<article class="stat-card"><div class="stat-icon green">₹</div><p>Today's sales</p><h2>₹{{ "%.2f"|format(stats['sales']) }}</h2><small>From delivery records</small></article>
+<article class="stat-card"><div class="stat-icon orange">↗</div><p>Month-to-date sales</p><h2>₹{{ "%.2f"|format(monthly) }}</h2><small>Payments received: ₹{{ "%.2f"|format(received) }}</small></article></section>
+<section class="quick-grid">
+<a class="quick-card" href="{{ url_for('customers') }}"><span>👤</span><div><strong>Manage customers</strong><small>Add accounts and prices</small></div><b>→</b></a>
+<a class="quick-card" href="{{ url_for('deliveries') }}"><span>🥛</span><div><strong>Record milk delivery</strong><small>Enter litres for each home</small></div><b>→</b></a>
+<a class="quick-card" href="{{ url_for('billing') }}"><span>🧾</span><div><strong>Generate a bill</strong><small>Weekly, monthly, custom dates</small></div><b>→</b></a>
+<a class="quick-card" href="{{ url_for('prediction') }}"><span>📈</span><div><strong>Predict milk demand</strong><small>Use recorded history with ML</small></div><b>→</b></a></section>
+<section class="panel table-panel"><div class="section-heading"><div><h2>Recent deliveries</h2><p class="muted">Latest recorded entries</p></div><a class="text-link" href="{{ url_for('deliveries') }}">View all →</a></div>
+<div class="table-wrap"><table><thead><tr><th>Date</th><th>Customer</th><th>Quantity</th><th>Rate</th><th>Amount</th></tr></thead><tbody>
+{% for row in recent %}<tr><td>{{ row['delivery_date'] }}</td><td>{{ row['customer_name'] }}</td><td>{{ "%.2f"|format(row['litres']) }} L</td><td>₹{{ "%.2f"|format(row['price_per_litre']) }}</td><td class="amount">₹{{ "%.2f"|format(row['litres']*row['price_per_litre']) }}</td></tr>{% else %}<tr><td colspan="5">No deliveries yet.</td></tr>{% endfor %}</tbody></table></div></section>{% endblock %}

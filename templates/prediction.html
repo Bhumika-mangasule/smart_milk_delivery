@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}ML Prediction{% endblock %}{% block content %}
+<div class="page-heading"><div><p class="eyebrow">MACHINE LEARNING</p><h1>Milk demand forecast</h1><p class="muted">Estimate how many litres may be needed in the coming days.</p></div></div>
+<section class="prediction-intro"><div class="prediction-symbol">📈</div><div><h2>Linear Regression model</h2><p>The model learns from daily recorded milk quantities and calendar features (day number, weekday, and month). Predictions do not change customer bills.</p></div></section>
+<section class="panel form-panel"><form method="post" class="forecast-form"><div><label>Forecast horizon</label><select name="days">{% for n in [7,14,30] %}<option value="{{ n }}" {% if days==n %}selected{% endif %}>Next {{ n }} days</option>{% endfor %}</select></div><button class="btn primary" type="submit">Generate prediction</button></form>
+{% if error %}<div class="flash error">{{ error }}</div>{% endif %}
+{% if forecast is not none %}<div class="forecast-summary"><div><span class="muted">Predicted total demand</span><h2>{{ "%.2f"|format(forecast|sum(attribute='predicted_litres')) }} L</h2></div><span class="pill">Linear Regression</span></div>
+<div class="table-wrap"><table><thead><tr><th>Forecast date</th><th>Estimated milk demand</th></tr></thead><tbody>{% for row in forecast %}<tr><td>{{ row['delivery_date'].strftime('%A, %d %b %Y') }}</td><td><strong>{{ "%.2f"|format(row['predicted_litres']) }} L</strong></td></tr>{% endfor %}</tbody></table></div>
+{% else %}<div class="empty-state">Choose a forecast period and click Generate prediction. Sample history is inserted on first launch.</div>{% endif %}</section>
+<section class="notice"><strong>Important:</strong> This is an educational baseline model. Better forecasts may need more history, holidays, weather, customer changes, and evaluation on unseen dates.</section>{% endblock %}
